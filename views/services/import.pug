@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  h1 Importer mes fichiers eshop-csv
+  p.version test : valider mes fichiers
+  hr
+  .row
+    .col-sm-6
+      form.form-horizontal(action='/services/import/file', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label(class='col-sm-2 control-label', for='name') Test name
+          .col-sm-8
+            input.form-control(type='text', name='name', id='name', autofocus=true)
+        .form-group
+          label(class='col-sm-2 control-label', for='email') Marque
+          .col-sm-8
+            select.form-control(type='select', name='marque', id='marque')
+        .form-group
+          label(class='col-sm-2 control-label', for='message') Type du test
+          .col-sm-8
+            textarea.form-control(name='message', id='message', rows='7')
+        .form-group
+          .col-sm-offset-2.col-sm-8
+            button.btn.btn-primary(type='submit')
+              i.fa.fa-envelope
+              | Send
+    .col-sm-6
+      h2 Resultat de mes tests
+      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      p
+        a.btn.btn-default(href='#', role='button') View details »
