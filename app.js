@@ -30,6 +30,8 @@ dotenv.load({ path: '.env.example' });
 /**
  * Controllers (route handlers).
  */
+
+const importController = require('./controllers/import');
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const contactController = require('./controllers/contact');
@@ -118,6 +120,8 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/services/import', importController.index);
+app.post('/services/import/file', importController.file);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
