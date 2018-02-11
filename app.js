@@ -19,6 +19,7 @@ const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
+const papaparse = require('papaparse');
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -88,7 +89,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
+  if (req.path === '/upload') {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -119,6 +120,11 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 /**
  * Primary app routes.
  */
+ app.post('/upload', upload.single('csvfile'),  function(req, res) {
+  console.log(req.file);
+  console.log(req.body.name);
+  console.log("testing my multer");
+});
 app.get('/', homeController.index);
 app.get('/services/import', importController.index);
 app.post('/services/import/file', importController.file);
